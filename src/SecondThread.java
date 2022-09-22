@@ -14,7 +14,7 @@ public class SecondThread implements Runnable{
         Random random = new Random();
         int K2 = random.nextInt(10000, 20000);
         for (int i = 0; i < K2; i++) {
-            car.addToTotalSpent(random.nextInt(0, 10));
+            car.addToTotalSpent(random.nextDouble(0, 10));
         }
         for (int i = 0; i < K2; i++) {
             user.addToBalance(random.nextDouble(0, 10));

@@ -1,22 +1,22 @@
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Car {
-    private int totalSpent;
+    private double totalSpent;
     ReentrantLock lock = new ReentrantLock();
 
     public Car() {
         totalSpent = 0;
     }
 
-    public Car(int totalSpent) {
+    public Car(double totalSpent) {
         this.totalSpent = totalSpent;
     }
 
-    public int getTotalSpent() {
+    public double getTotalSpent() {
         return totalSpent;
     }
 
-    public void setTotalSpent(int totalSpent) {
+    public void setTotalSpent(double totalSpent) {
         lock.lock();
         try {
             this.totalSpent = totalSpent;
@@ -25,7 +25,7 @@ public class Car {
         }
     }
 
-    public int addToTotalSpent(int add) {
+    public double addToTotalSpent(double add) {
         lock.lock();
         try {
             return totalSpent += add;
@@ -34,7 +34,7 @@ public class Car {
         }
     }
 
-    public int subtractFromTotalSpent(int subtract) {
+    public double subtractFromTotalSpent(double subtract) {
         lock.lock();
         try {
             return totalSpent -= subtract;
