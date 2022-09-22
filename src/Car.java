@@ -2,6 +2,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Car {
     private double totalSpent;
+
     ReentrantLock lock = new ReentrantLock();
 
     public Car() {
