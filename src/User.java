@@ -1,5 +1,8 @@
+import java.util.concurrent.locks.ReentrantLock;
+
 public class User {
     private double balance;
+    ReentrantLock lock = new ReentrantLock();
 
     public User() {
         balance = 0;
@@ -14,14 +17,33 @@ public class User {
     }
 
     public void setBalance(double balance) {
-        this.balance = balance;
+        lock.lock();
+        try {
+            this.balance = balance;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double addToBalance(double add) {
-        return balance += add;
+        lock.lock();
+        try {
+            return balance += add;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double subtractFromBalance(double subtract) {
-        return balance -= subtract;
+        lock.lock();
+        try {
+            return balance -= subtract;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public String toString() {
+        return "Balance: " + balance;
     }
 }
