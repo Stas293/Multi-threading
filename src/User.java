@@ -1,46 +1,30 @@
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class User {
-    private double balance;
-    ReentrantLock lock = new ReentrantLock();
+    private final AtomicInteger balance;
 
     public User() {
-        balance = 0;
+        balance = new AtomicInteger(0);
     }
 
-    public User(double balance) {
-        this.balance = balance;
+    public User(int balance) {
+        this.balance = new AtomicInteger(balance);
     }
 
-    public double getBalance() {
-        return this.balance;
+    public int getBalance() {
+        return this.balance.get();
     }
 
-    public void setBalance(double balance) {
-        lock.lock();
-        try {
-            this.balance = balance;
-        } finally {
-            lock.unlock();
-        }
+    public void setBalance(int balance) {
+        this.balance.set(balance);
     }
 
-    public double addToBalance(double add) {
-        lock.lock();
-        try {
-            return balance += add;
-        } finally {
-            lock.unlock();
-        }
+    public double addToBalance(int add) {
+        return this.balance.addAndGet(add);
     }
 
-    public double subtractFromBalance(double subtract) {
-        lock.lock();
-        try {
-            return balance -= subtract;
-        } finally {
-            lock.unlock();
-        }
+    public double subtractFromBalance(int subtract) {
+        return this.balance.addAndGet(-subtract);
     }
 
     public String toString() {

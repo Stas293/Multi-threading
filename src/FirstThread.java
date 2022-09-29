@@ -14,8 +14,8 @@ public class FirstThread implements Runnable{
         Random random = new Random();
         int K1 = random.nextInt(10000, 20000);
         for (int i = 0; i < K1; i++) {
-            user.addToBalance(random.nextDouble(0, 10));
-            car.addToTotalSpent(random.nextDouble(0, 100));
+            user.addToBalance(random.nextInt(0, 10));
+            car.addToTotalSpent(random.nextInt(0, 100));
         }
     }
 }
