@@ -1,7 +1,7 @@
 import java.util.concurrent.locks.ReentrantLock;
 
 public class User {
-    private double balance;
+    private volatile double balance;
     ReentrantLock lock = new ReentrantLock();
 
     public User() {

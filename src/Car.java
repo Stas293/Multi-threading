@@ -1,8 +1,8 @@
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Car {
-    private double totalSpent;
-
+    private volatile double totalSpent;
     ReentrantLock lock = new ReentrantLock();
 
     public Car() {

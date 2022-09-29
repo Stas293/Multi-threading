@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 public class MultithreadingClass {
     public static void main(String[] args) {
@@ -31,6 +30,6 @@ public class MultithreadingClass {
         System.out.println("The program stopped");
         System.out.println("User: " + user);
         System.out.println("Car: " + car);
-        System.out.println("Total spent: " + (stopTime - startTime));
+        System.out.println("Total spent: " + (stopTime - startTime) + " ms");
     }
 }
