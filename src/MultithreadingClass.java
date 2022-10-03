@@ -31,6 +31,6 @@ public class MultithreadingClass {
         System.out.println("The program stopped");
         System.out.println("User: " + user);
         System.out.println("Car: " + car);
-        System.out.println("Total spent: " + (stopTime - startTime));
+        System.out.println("Total spent: " + (stopTime - startTime) + " ms");
     }
 }
