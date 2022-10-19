@@ -11,15 +11,16 @@ public class MultithreadingClass {
             collatzIntegers.add(i);
         }
         System.out.println("Collatz integers: " + collatzIntegers);
-        ExecutorService executorService = Executors.newCachedThreadPool();
         long startTime = System.currentTimeMillis();
-        for (int i = 0; i < NUMBERS; i++) {
-            executorService.submit(new Collatz(collatzIntegers));
+        try (ExecutorService executorService = Executors.newCachedThreadPool()) {
+            for (int i = 0; i < NUMBERS; i++) {
+                executorService.submit(new Collatz(collatzIntegers));
+            }
+            executorService.shutdown();
+            while (!executorService.isTerminated()) {
+            }
+        } finally {
+            System.out.println("Time: " + (System.currentTimeMillis() - startTime) + " ms");
         }
-        executorService.shutdown();
-        while (!executorService.isTerminated()) {
-        }
-        long endTime = System.currentTimeMillis();
-        System.out.println("Time taken: " + (endTime - startTime) + "ms");
     }
 }
