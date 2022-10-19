@@ -16,9 +16,6 @@ public class MultithreadingClass {
             for (int i = 0; i < NUMBERS; i++) {
                 executorService.submit(new Collatz(collatzIntegers));
             }
-            executorService.shutdown();
-            while (!executorService.isTerminated()) {
-            }
         } finally {
             System.out.println("Time: " + (System.currentTimeMillis() - startTime) + " ms");
         }
