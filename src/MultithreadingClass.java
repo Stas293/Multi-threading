@@ -1,36 +1,23 @@
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class MultithreadingClass {
+    private static final int NUMBERS = 100;
     public static void main(String[] args) {
-        ArrayList<Thread> threads = new ArrayList<>();
-        Random random = new Random();
-        int N = random.nextInt(10, 21);
-        System.out.println("N = " + N);
-        User user = new User();
-        Car car = new Car();
+        BlockingQueue<Integer> collatzIntegers = new LinkedBlockingQueue<>();
+        for (int i = 1; i < NUMBERS; i++) {
+            collatzIntegers.add(i);
+        }
+        System.out.println("Collatz integers: " + collatzIntegers);
         long startTime = System.currentTimeMillis();
-        for (int i = 0; i < N; i++) {
-            if (i < N / 2) {
-                threads.add(new Thread(new FirstThread(user, car)));
-            } else {
-                threads.add(new Thread(new SecondThread(user, car)));
+        try (ExecutorService executorService = Executors.newCachedThreadPool()) {
+            for (int i = 0; i < NUMBERS; i++) {
+                executorService.submit(new Collatz(collatzIntegers));
             }
+        } finally {
+            System.out.println("Time: " + (System.currentTimeMillis() - startTime) + " ms");
         }
-        for (Thread thread : threads) {
-            thread.start();
-        }
-        for (Thread thread : threads) {
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        long stopTime = System.currentTimeMillis();
-        System.out.println("The program stopped");
-        System.out.println("User: " + user);
-        System.out.println("Car: " + car);
-        System.out.println("Total spent: " + (stopTime - startTime) + " ms");
     }
 }
